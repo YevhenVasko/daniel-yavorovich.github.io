@@ -10,7 +10,7 @@
 что без труда помог конвертироватьв се мои блогозаписи в строгий md.&lt;/p&gt;
 &lt;p&gt;Признаюсь, что Pelican неплох. Если бы я писал blog engine, то он бы был хуже Pelican.&lt;/p&gt;
 &lt;p&gt;Статические сайты снова в моде.
-Всем мир!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Даниэль Яворович</dc:creator><pubDate>Fri, 22 Nov 2013 14:04:00 +0200</pubDate><guid>tag:yavorovych.com,2013-11-22:migration-to-the-github.html</guid><category>blog</category><category>migration</category></item><item><title>RPM SQLite 3.7.1</title><link>http://yavorovych.com/rpm-sqlite-371.html</link><description>&lt;p&gt;Привет, привет! Сегодня в одном из проектов у моего хорошего приятеля
+Всем мир!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Даниэль Яворович</dc:creator><pubDate>Fri, 22 Nov 2013 14:04:00 +0200</pubDate><guid>tag:yavorovych.com,2013-11-22:migration-to-the-github.html</guid><category>blog</category><category>migration</category><category>github</category></item><item><title>RPM SQLite 3.7.1</title><link>http://yavorovych.com/rpm-sqlite-371.html</link><description>&lt;p&gt;Привет, привет! Сегодня в одном из проектов у моего хорошего приятеля
 потребовалось поддержка fts3/fts4 и возможность подключать дополнения(
 sqlite3_load_extension()). Многие на моём месте сразу пойду делать "configure;
 make; make install". Многие, но не я. Собрать пакет с поддержкой всего этого
