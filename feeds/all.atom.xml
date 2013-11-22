@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>История одной жизни</title><link href="http://yavorovych.com/" rel="alternate"></link><link href="http://yavorovych.com/feeds/all.atom.xml" rel="self"></link><id>http://yavorovych.com/</id><updated>2013-11-22T00:54:00+02:00</updated><entry><title>Быстрый день</title><link href="http://yavorovych.com/bystryi-den.html" rel="alternate"></link><updated>2013-11-22T00:54:00+02:00</updated><author><name>Даниэль Яворович</name></author><id>tag:yavorovych.com,2013-11-22:bystryi-den.html</id><summary type="html">&lt;p&gt;Сегодня очень быстрый день. Вчера я хотел провести этот день с сестрой и по
+<feed xmlns="http://www.w3.org/2005/Atom"><title>История одной жизни</title><link href="http://yavorovych.com/" rel="alternate"></link><link href="http://yavorovych.com/feeds/all.atom.xml" rel="self"></link><id>http://yavorovych.com/</id><updated>2013-11-22T14:04:00+02:00</updated><entry><title>Миграция на githab</title><link href="http://yavorovych.com/migration-to-the-githab.html" rel="alternate"></link><updated>2013-11-22T14:04:00+02:00</updated><author><name>Даниэль Яворович</name></author><id>tag:yavorovych.com,2013-11-22:migration-to-the-githab.html</id><summary type="html">&lt;p&gt;Всем привет!&lt;/p&gt;
+&lt;p&gt;Вот и меня постигла участь олдскульного подхода к хостингу блогозаписей - статические страницы.&lt;/p&gt;
+&lt;p&gt;Мой выбор пал на:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://pages.github.com/"&gt;GitHub Pages&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Статьи пишу в Markdown, отдельное спасибо за &lt;a href="https://github.com/aaronsw/html2text"&gt;Html2Text&lt;/a&gt; - очень удобный инструмент,
+что без труда помог конвертироватьв се мои блогозаписи в строгий md.&lt;/p&gt;
+&lt;p&gt;Признаюсь, что Pelican неплох. Если бы я писал blog engine, то он бы был хуже Pelican.&lt;/p&gt;
+&lt;p&gt;Статические сайты снова в моде.
+Всем мир!&lt;/p&gt;</summary><category term="blog"></category><category term="migration"></category></entry><entry><title>Быстрый день</title><link href="http://yavorovych.com/bystryi-den.html" rel="alternate"></link><updated>2013-11-22T00:54:00+02:00</updated><author><name>Даниэль Яворович</name></author><id>tag:yavorovych.com,2013-11-22:bystryi-den.html</id><summary type="html">&lt;p&gt;Сегодня очень быстрый день. Вчера я хотел провести этот день с сестрой и по
 большей части - это получилось. Возможно, не так хорошо, как хотелось бы, но я
 остался даволен этой встречей!&lt;/p&gt;
 &lt;p&gt;Амира рассказала мне много о своей школе и проблемах взаимоотношений в ней.

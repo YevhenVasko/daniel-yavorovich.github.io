@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>История одной жизни</title><link href="http://yavorovych.com/" rel="alternate"></link><link href="http://yavorovych.com/feeds/unix.atom.xml" rel="self"></link><id>http://yavorovych.com/</id><updated>2012-11-03T14:15:45+02:00</updated><entry><title>RPM SQLite 3.7.1</title><link href="http://yavorovych.com/rpm-sqlite-371.html" rel="alternate"></link><updated>2012-11-03T14:15:45+02:00</updated><author><name>Даниэль Яворович</name></author><id>tag:yavorovych.com,2012-11-03:rpm-sqlite-371.html</id><summary type="html">&lt;p&gt;Привет, привет! Сегодня в одном из проектов у моего хорошего приятеля
+<feed xmlns="http://www.w3.org/2005/Atom"><title>История одной жизни</title><link href="http://yavorovych.com/" rel="alternate"></link><link href="http://yavorovych.com/feeds/unix.atom.xml" rel="self"></link><id>http://yavorovych.com/</id><updated>2013-11-22T14:04:00+02:00</updated><entry><title>Миграция на githab</title><link href="http://yavorovych.com/migration-to-the-githab.html" rel="alternate"></link><updated>2013-11-22T14:04:00+02:00</updated><author><name>Даниэль Яворович</name></author><id>tag:yavorovych.com,2013-11-22:migration-to-the-githab.html</id><summary type="html">&lt;p&gt;Всем привет!&lt;/p&gt;
+&lt;p&gt;Вот и меня постигла участь олдскульного подхода к хостингу блогозаписей - статические страницы.&lt;/p&gt;
+&lt;p&gt;Мой выбор пал на:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://pages.github.com/"&gt;GitHub Pages&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Статьи пишу в Markdown, отдельное спасибо за &lt;a href="https://github.com/aaronsw/html2text"&gt;Html2Text&lt;/a&gt; - очень удобный инструмент,
+что без труда помог конвертироватьв се мои блогозаписи в строгий md.&lt;/p&gt;
+&lt;p&gt;Признаюсь, что Pelican неплох. Если бы я писал blog engine, то он бы был хуже Pelican.&lt;/p&gt;
+&lt;p&gt;Статические сайты снова в моде.
+Всем мир!&lt;/p&gt;</summary><category term="blog"></category><category term="migration"></category></entry><entry><title>RPM SQLite 3.7.1</title><link href="http://yavorovych.com/rpm-sqlite-371.html" rel="alternate"></link><updated>2012-11-03T14:15:45+02:00</updated><author><name>Даниэль Яворович</name></author><id>tag:yavorovych.com,2012-11-03:rpm-sqlite-371.html</id><summary type="html">&lt;p&gt;Привет, привет! Сегодня в одном из проектов у моего хорошего приятеля
 потребовалось поддержка fts3/fts4 и возможность подключать дополнения(
 sqlite3_load_extension()). Многие на моём месте сразу пойду делать "configure;
 make; make install". Многие, но не я. Собрать пакет с поддержкой всего этого

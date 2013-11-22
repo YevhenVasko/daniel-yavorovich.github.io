@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>История одной жизни</title><link>http://yavorovych.com/</link><description></description><atom:link href="http://yavorovych.com/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 22 Nov 2013 00:54:00 +0200</lastBuildDate><item><title>Быстрый день</title><link>http://yavorovych.com/bystryi-den.html</link><description>&lt;p&gt;Сегодня очень быстрый день. Вчера я хотел провести этот день с сестрой и по
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>История одной жизни</title><link>http://yavorovych.com/</link><description></description><atom:link href="http://yavorovych.com/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 22 Nov 2013 14:04:00 +0200</lastBuildDate><item><title>Миграция на githab</title><link>http://yavorovych.com/migration-to-the-githab.html</link><description>&lt;p&gt;Всем привет!&lt;/p&gt;
+&lt;p&gt;Вот и меня постигла участь олдскульного подхода к хостингу блогозаписей - статические страницы.&lt;/p&gt;
+&lt;p&gt;Мой выбор пал на:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://pages.github.com/"&gt;GitHub Pages&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Статьи пишу в Markdown, отдельное спасибо за &lt;a href="https://github.com/aaronsw/html2text"&gt;Html2Text&lt;/a&gt; - очень удобный инструмент,
+что без труда помог конвертироватьв се мои блогозаписи в строгий md.&lt;/p&gt;
+&lt;p&gt;Признаюсь, что Pelican неплох. Если бы я писал blog engine, то он бы был хуже Pelican.&lt;/p&gt;
+&lt;p&gt;Статические сайты снова в моде.
+Всем мир!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Даниэль Яворович</dc:creator><pubDate>Fri, 22 Nov 2013 14:04:00 +0200</pubDate><guid>tag:yavorovych.com,2013-11-22:migration-to-the-githab.html</guid><category>blog</category><category>migration</category></item><item><title>Быстрый день</title><link>http://yavorovych.com/bystryi-den.html</link><description>&lt;p&gt;Сегодня очень быстрый день. Вчера я хотел провести этот день с сестрой и по
 большей части - это получилось. Возможно, не так хорошо, как хотелось бы, но я
 остался даволен этой встречей!&lt;/p&gt;
 &lt;p&gt;Амира рассказала мне много о своей школе и проблемах взаимоотношений в ней.
