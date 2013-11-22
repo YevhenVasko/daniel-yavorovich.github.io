@@ -1,4 +1,4 @@
-daniel-yavorovich.github.io
-===========================
+blog
+====
 
-Сон наяву
+Personal blog

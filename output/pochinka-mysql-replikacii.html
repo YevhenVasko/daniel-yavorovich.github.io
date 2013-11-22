@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+        <title>Починка MySQL-репликации</title>
+        <meta charset="utf-8" />
+        <link href="http://yavorovych.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="История одной жизни Full Atom Feed" />
+        <link href="http://yavorovych.com/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="История одной жизни Full RSS Feed" />
+        <link href="http://yavorovych.com/feeds/unix.atom.xml" type="application/atom+xml" rel="alternate" title="История одной жизни Categories Atom Feed" />
+        <link href="http://yavorovych.com/feeds/unix.rss.xml" type="application/rss+xml" rel="alternate" title="История одной жизни Categories RSS Feed" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://yavorovych.com/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://yavorovych.com/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://yavorovych.com/theme/pygment.css" />
+
+        <script src="http://yavorovych.com/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://yavorovych.com">История одной жизни <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://yavorovych.com">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://yavorovych.com/pochinka-mysql-replikacii.html" rel="bookmark"
+                   title="Permalink to Починка MySQL-репликации">Починка MySQL-репликации</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2012-01-03T09:18:08">
+                Tue 03 January 2012
+              </abbr>
+              <address class="vcard author">
+                By <a class="url fn" href="http://yavorovych.com/author/daniel-iavorovich.html">Даниэль Яворович</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <h3>Into</h3>
+<p>Предположим, что у нас уже настроена репликация MySQL, но мы увидели ошибку.
+Обычно это выглядит так:</p>
+<div class="highlight"><pre><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">show</span> <span class="n">slave</span> <span class="n">status</span><span class="err">\</span><span class="n">G</span>
+<span class="o">***************************</span> <span class="mf">1.</span> <span class="n">row</span> <span class="o">***************************</span>
+             <span class="nl">Slave_IO_State:</span> <span class="n">Waiting</span> <span class="k">for</span> <span class="n">master</span> <span class="n">to</span> <span class="n">send</span> <span class="n">event</span>
+                <span class="nl">Master_Host:</span> <span class="mf">192.168.0.1</span>
+                <span class="nl">Master_User:</span> <span class="n">db_name</span>
+                <span class="nl">Master_Port:</span> <span class="mi">3306</span>
+              <span class="nl">Connect_Retry:</span> <span class="mi">60</span>
+            <span class="nl">Master_Log_File:</span> <span class="n">mysqld</span><span class="o">-</span><span class="n">bin</span><span class="mf">.000008</span>
+        <span class="nl">Read_Master_Log_Pos:</span> <span class="mi">609198672</span>
+             <span class="nl">Relay_Log_File:</span> <span class="n">se</span><span class="o">-</span><span class="n">relay</span><span class="o">-</span><span class="n">bin</span><span class="mf">.000276</span>
+              <span class="nl">Relay_Log_Pos:</span> <span class="mi">241568916</span>
+      <span class="nl">Relay_Master_Log_File:</span> <span class="n">mysqld</span><span class="o">-</span><span class="n">bin</span><span class="mf">.000008</span>
+           <span class="nl">Slave_IO_Running:</span> <span class="n">Yes</span>
+          <span class="nl">Slave_SQL_Running:</span> <span class="n">No</span>
+            <span class="nl">Replicate_Do_DB:</span> <span class="n">db_name</span>
+        <span class="nl">Replicate_Ignore_DB:</span>
+         <span class="nl">Replicate_Do_Table:</span>
+     <span class="nl">Replicate_Ignore_Table:</span>
+    <span class="nl">Replicate_Wild_Do_Table:</span>
+<span class="nl">Replicate_Wild_Ignore_Table:</span>
+                 <span class="nl">Last_Errno:</span> <span class="mi">0</span>
+                 <span class="nl">Last_Error:</span> <span class="n">Query</span> <span class="n">caused</span> <span class="n">different</span> <span class="n">errors</span> <span class="n">on</span> <span class="n">master</span> <span class="n">and</span> <span class="n">slave</span><span class="p">.</span> <span class="n">Error</span> <span class="n">on</span> <span class="n">master</span><span class="o">:</span> <span class="err">&#39;</span><span class="n">Invalid</span> <span class="n">error</span> <span class="n">code</span><span class="err">&#39;</span> <span class="p">(</span><span class="mi">126</span><span class="p">),</span> <span class="n">Error</span> <span class="n">on</span> <span class="n">slave</span><span class="o">:</span> <span class="err">&#39;</span><span class="n">no</span> <span class="n">error</span><span class="err">&#39;</span> <span class="p">(</span><span class="mi">0</span><span class="p">).</span> <span class="n">Default</span> <span class="n">database</span><span class="o">:</span> <span class="err">&#39;</span><span class="n">db_name</span><span class="err">&#39;</span><span class="p">.</span> <span class="n">Query</span><span class="o">:</span> <span class="err">&#39;</span><span class="n">DELETE</span> <span class="n">FROM</span> <span class="n">sess</span> <span class="n">WHERE</span> <span class="n">id</span> <span class="n">IN</span> <span class="p">(</span><span class="mi">5315971</span><span class="p">,</span> <span class="mi">5315968</span><span class="p">,</span> <span class="mi">5315967</span><span class="p">,</span> <span class="mi">5315965</span><span class="p">,</span> <span class="mi">5315963</span><span class="p">,</span> <span class="mi">5315962</span><span class="p">,</span> <span class="mi">5315961</span><span class="p">,</span> <span class="mi">5315960</span><span class="p">,</span> <span class="mi">5315959</span><span class="p">,</span> <span class="mi">5315958</span><span class="p">,</span> <span class="mi">5315957</span><span class="p">,</span> <span class="mi">5315956</span><span class="p">,</span> <span class="mi">5315955</span><span class="p">,</span> <span class="mi">5315954</span><span class="p">,</span> <span class="mi">5315953</span><span class="p">,</span> <span class="mi">5315952</span><span class="p">,</span> <span class="mi">5315950</span><span class="p">,</span> <span class="mi">5315949</span><span class="p">,</span> <span class="mi">5315948</span><span class="p">,</span> <span class="mi">5315947</span><span class="p">,</span> <span class="mi">5315946</span><span class="p">,</span> <span class="mi">5315945</span><span class="p">,</span> <span class="mi">5315944</span><span class="p">,</span> <span class="mi">5315942</span><span class="p">,</span> <span class="mi">5315941</span><span class="p">,</span> <span class="mi">5315939</span><span class="p">,</span> <span class="mi">5315938</span><span class="p">,</span> <span class="mi">5315937</span><span class="p">,</span> <span class="mi">5315936</span><span class="p">,</span> <span class="mi">5315935</span><span class="p">,</span> <span class="mi">5315934</span><span class="p">,</span> <span class="mi">5315933</span><span class="p">,</span> <span class="mi">5315932</span><span class="p">,</span> <span class="mi">5315931</span><span class="p">,</span> <span class="mi">5315929</span><span class="p">,</span> <span class="mi">5315928</span><span class="p">,</span> <span class="mi">5315927</span><span class="p">,</span> <span class="mi">5315924</span><span class="p">,</span> <span class="mi">5315923</span><span class="p">,</span> <span class="mi">5315922</span><span class="p">,</span> <span class="mi">5315921</span><span class="p">,</span> <span class="mi">5315920</span><span class="p">,</span> <span class="mi">5315918</span><span class="p">,</span> <span class="mi">5315917</span><span class="p">,</span> <span class="mi">5315916</span><span class="p">,</span> <span class="mi">5315914</span><span class="p">,</span> <span class="mi">5315912</span><span class="p">,</span> <span class="mi">5315910</span><span class="p">,</span> <span class="mi">5315908</span><span class="p">,</span> <span class="mi">5315907</span><span class="p">,</span> <span class="mi">5315906</span><span class="p">,</span> <span class="mi">5315904</span><span class="p">,</span> <span class="mi">5315903</span><span class="p">,</span> <span class="mi">5315902</span><span class="p">,</span> <span class="mi">5315901</span><span class="p">,</span> <span class="mi">5315899</span><span class="p">,</span> <span class="mi">5315898</span><span class="p">,</span> <span class="mi">5315897</span><span class="p">,</span> <span class="mi">5315896</span><span class="p">,</span> <span class="mi">5315895</span><span class="p">,</span> <span class="mi">5315894</span><span class="p">,</span> <span class="mi">5315893</span><span class="p">,</span> <span class="mi">5315892</span><span class="p">,</span> <span class="mi">5315891</span><span class="p">,</span> <span class="mi">5315890</span><span class="p">,</span> <span class="mi">5315888</span><span class="p">,</span> <span class="mi">5315887</span><span class="p">,</span> <span class="mi">5315886</span><span class="p">,</span> <span class="mi">5315884</span><span class="p">,</span> <span class="mi">5315882</span><span class="p">,</span> <span class="mi">5315881</span><span class="p">,</span> <span class="mi">5315880</span><span class="p">,</span> <span class="mi">5315879</span><span class="p">,</span> <span class="mi">5315878</span><span class="p">,</span> <span class="mi">5315877</span><span class="p">,</span> <span class="mi">5315876</span><span class="p">,</span> <span class="mi">5315875</span><span class="p">,</span> <span class="mi">5315874</span><span class="p">,</span> <span class="mi">5315873</span><span class="p">,</span> <span class="mi">5315871</span><span class="p">,</span> <span class="mi">5315870</span><span class="p">,</span> <span class="mi">5315869</span><span class="p">,</span> <span class="mi">5315865</span><span class="p">,</span> <span class="mi">5315864</span><span class="p">,</span> <span class="mi">5315863</span><span class="p">,</span> <span class="mi">5315862</span><span class="p">,</span> <span class="mi">5315861</span><span class="p">,</span> <span class="mi">5315860</span><span class="p">,</span> <span class="mi">5315858</span><span class="p">,</span> <span class="mi">5315857</span><span class="p">,</span> <span class="mi">5315856</span><span class="p">,</span> <span class="mi">5315855</span>
+               <span class="nl">Skip_Counter:</span> <span class="mi">0</span>
+        <span class="nl">Exec_Master_Log_Pos:</span> <span class="mi">578805429</span>
+            <span class="nl">Relay_Log_Space:</span> <span class="mi">271962159</span>
+            <span class="nl">Until_Condition:</span> <span class="n">None</span>
+             <span class="nl">Until_Log_File:</span>
+              <span class="nl">Until_Log_Pos:</span> <span class="mi">0</span>
+         <span class="nl">Master_SSL_Allowed:</span> <span class="n">No</span>
+         <span class="nl">Master_SSL_CA_File:</span>
+         <span class="nl">Master_SSL_CA_Path:</span>
+            <span class="nl">Master_SSL_Cert:</span>
+          <span class="nl">Master_SSL_Cipher:</span>
+             <span class="nl">Master_SSL_Key:</span>
+      <span class="nl">Seconds_Behind_Master:</span> <span class="nb">NULL</span>
+<span class="mi">1</span> <span class="n">row</span> <span class="n">in</span> <span class="n">set</span> <span class="p">(</span><span class="mf">0.00</span> <span class="n">sec</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Сперва нам нужно создать актуальный дамп базы данных, сохранив имя файла
+бинарных логов и последнюю позицию. Ранее это делалось мной руками, а сегодня
+я узнал о такой замечательной опции mysqldump, как --master-data, которую мы и
+будем использовать. '''--master-data''' добавляет в sql-dump "CHANGE MASTER" с
+актуальными данными, что позволяет не выполнять лишних действий.</p>
+<h3>Master</h3>
+<p>Запрещаем write-операции на master-сервере:</p>
+<div class="highlight"><pre><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">FLUSH</span> <span class="n">TABLES</span> <span class="n">WITH</span> <span class="n">READ</span> <span class="n">LOCK</span><span class="p">;</span>
+</pre></div>
+
+
+<p>Создаём sql-dump реплизируемой базы, включая "CHANGE MASTER":</p>
+<div class="highlight"><pre><span class="n">mysqldump</span> <span class="o">--</span><span class="n">lock</span><span class="o">-</span><span class="n">all</span><span class="o">-</span><span class="n">tables</span> <span class="o">--</span><span class="n">master</span><span class="o">-</span><span class="n">data</span> <span class="n">db_name</span> <span class="o">&gt;</span> <span class="n">db_name</span><span class="p">.</span><span class="n">sql</span>
+</pre></div>
+
+
+<p>Не забываем разлочить таблицы:</p>
+<div class="highlight"><pre><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">SET</span> <span class="n">GLOBAL</span> <span class="n">read_only</span> <span class="o">=</span> <span class="n">OFF</span><span class="p">;</span>
+</pre></div>
+
+
+<p>Теперь копируем созданный dump на все слейвы.</p>
+<h3>Slave</h3>
+<p>Останавливаем репликацию и на всякий случай ресетим данные бинарного лога.</p>
+<div class="highlight"><pre><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">stop</span> <span class="n">slave</span><span class="p">;</span>
+<span class="n">mysql</span><span class="o">&gt;</span> <span class="n">reset</span> <span class="n">slave</span><span class="p">;</span>
+</pre></div>
+
+
+<p>Восстанавливаем реплицируемую БД из sql-dump'а (сразу выполнится CHANGE
+MASTER. Мы расчитываем на то, что настройки доступа к master-серверу уже
+прописаны в my.cnf и MySQL быз запущен с ними)</p>
+<div class="highlight"><pre><span class="n">cat</span> <span class="n">db_name</span><span class="p">.</span><span class="n">sql</span> <span class="o">|</span> <span class="n">mysql</span> <span class="n">db_name</span>
+</pre></div>
+
+
+<p>Запускаем репликацию и проверяем статус.</p>
+<div class="highlight"><pre><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">start</span> <span class="n">slave</span><span class="p">;</span>
+<span class="n">mysql</span><span class="o">&gt;</span> <span class="n">show</span> <span class="n">slave</span> <span class="n">status</span><span class="err">\</span><span class="n">G</span>
+</pre></div>
+            </div><!-- /.entry-content -->
+            <div class="comments">
+              <h3>Comments</h3>
+              <div id="disqus_thread"></div>
+              <script type="text/javascript">
+                var disqus_identifier = "pochinka-mysql-replikacii.html";
+                (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = 'http://danielyavorovichblog.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+              </script>
+            </div>
+
+
+        </div><!-- /.eleven.columns -->
+        
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul>
+		<li><a href="http://yavorovych.com/category/life.html">Life</a></li>
+		<li><a href="http://yavorovych.com/category/thinking.html">Thinking</a></li>
+		<li><a href="http://yavorovych.com/category/unix.html">Unix</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+	<ul>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/virtualenv.html">virtualenv</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/sqlite.html">sqlite</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/3d.html">3d</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/gimp.html">gimp</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/monitoring.html">monitoring</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/amazon.html">amazon</a></li>
+	    <li class="tag-1"><a href="http://yavorovych.com/tag/django.html">django</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/s3fs.html">s3fs</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/s3.html">s3</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/kharkov.html">kharkov</a></li>
+	    <li class="tag-1"><a href="http://yavorovych.com/tag/ubuntu.html">ubuntu</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/zabbix.html">zabbix</a></li>
+	    <li class="tag-1"><a href="http://yavorovych.com/tag/python.html">python</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/ext4.html">ext4</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/fts.html">fts</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/recreate.html">recreate</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/hosting4django.html">hosting4django</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/signal.html">signal</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/sqlite3_load_extension.html">sqlite3_load_extension</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/launcher.html">launcher</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/cache.html">cache</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/powerdns.html">powerdns</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/websocket.html">websocket</a></li>
+	    <li class="tag-1"><a href="http://yavorovych.com/tag/clean.html">clean</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/fs.html">fs</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/zoohelp.html">zoohelp</a></li>
+	    <li class="tag-1"><a href="http://yavorovych.com/tag/puppet.html">puppet</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/unity.html">unity</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/webmoney.html">webmoney</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/automatiozation.html">automatiozation</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/testing.html">testing</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/tune2fs.html">tune2fs</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/journal.html">journal</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/templates.html">templates</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/euro2012.html">euro2012</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/ext3.html">ext3</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/fairplay.html">fairplay</a></li>
+</ul>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul>
+    <li><a href="https://github.com/daniel-yavorovich">github</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+                <li><div class="btn primary"><a href="https://github.com/daniel-yavorovich" target="_blank">Github</a></div></li>
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+<script type="text/javascript">
+    var disqus_shortname = 'danielyavorovichblog';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+  <script src="http://yavorovych.com/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://yavorovych.com/theme/js/libs/gumby.min.js"></script>
+  <script src="http://yavorovych.com/theme/js/plugins.js"></script>
+
+</body>
+</html>

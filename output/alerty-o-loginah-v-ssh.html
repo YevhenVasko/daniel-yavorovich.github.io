@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+        <title>Алерты о логинах в SSH</title>
+        <meta charset="utf-8" />
+        <link href="http://yavorovych.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="История одной жизни Full Atom Feed" />
+        <link href="http://yavorovych.com/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="История одной жизни Full RSS Feed" />
+        <link href="http://yavorovych.com/feeds/unix.atom.xml" type="application/atom+xml" rel="alternate" title="История одной жизни Categories Atom Feed" />
+        <link href="http://yavorovych.com/feeds/unix.rss.xml" type="application/rss+xml" rel="alternate" title="История одной жизни Categories RSS Feed" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://yavorovych.com/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://yavorovych.com/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://yavorovych.com/theme/pygment.css" />
+
+        <script src="http://yavorovych.com/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://yavorovych.com">История одной жизни <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://yavorovych.com">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://yavorovych.com/alerty-o-loginah-v-ssh.html" rel="bookmark"
+                   title="Permalink to Алерты о логинах в SSH">Алерты о логинах в SSH</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2011-10-19T03:04:08">
+                Wed 19 October 2011
+              </abbr>
+              <address class="vcard author">
+                By <a class="url fn" href="http://yavorovych.com/author/daniel-iavorovich.html">Даниэль Яворович</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>Недавно один из моих серверов был скомпрометирован а следом и 3 других, к
+которым основной сервер имел доступ. История не столь интересная, чтобы
+описывать её, да и желания нету. Вместо стандартных советов типа "не вешайте
+SSH на дефолтный порт, не давайте логинится от рута и ограничивайте доступ к
+портам по возможности" (а это очень важные советы, я очень рекомендую им
+следовать) хочу предоставить простой скрипт, что будет алертить каждый раз,
+когда кто либо будет логинится по SSH к вам на сервер. Возможно, подобные
+алерты могут немного раздражать, но нельзя переоценить их надобность. После
+установки руткита какую либо информацию вытащить будет сложно, а у Вас,
+возможно, будет несколько ценных писем с адресами.</p>
+<p>Итак, сам код:</p>
+<div class="highlight"><pre>    <span class="k">if</span> <span class="p">[</span> <span class="s">&quot;$SSH_CONNECTION&quot;</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span> <span class="p">];</span> <span class="n">then</span>
+            <span class="n">DATE</span><span class="o">=</span><span class="n">date</span> <span class="s">&quot;+%d.%m.%Y %Hh%Mm&quot;</span>
+            <span class="n">IP</span><span class="o">=</span><span class="n">echo</span> <span class="err">$</span><span class="n">SSH_CONNECTION</span> <span class="o">|</span> <span class="n">awk</span> <span class="err">&#39;</span><span class="p">{</span><span class="n">print</span> <span class="err">$</span><span class="mi">1</span><span class="p">}</span><span class="err">&#39;</span>
+            <span class="n">REVERSE</span><span class="o">=</span><span class="n">dig</span> <span class="o">-</span><span class="n">x</span> <span class="err">$</span><span class="n">IP</span> <span class="o">+</span><span class="kt">short</span>
+            <span class="n">WHO</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">whois</span> <span class="err">$</span><span class="n">IP</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">desc</span> <span class="o">|</span> <span class="n">tail</span> <span class="o">-</span><span class="mi">1</span> <span class="o">|</span> <span class="n">cut</span> <span class="o">-</span><span class="n">c</span> <span class="mi">17</span><span class="o">-</span><span class="p">)</span>
+            <span class="n">SERVER_IPS</span><span class="o">=</span><span class="n">ip</span> <span class="n">addr</span> <span class="o">|</span> <span class="n">awk</span> <span class="err">&#39;</span><span class="o">/</span><span class="n">inet</span><span class="o">/</span><span class="p">{</span><span class="n">print</span> <span class="err">$</span><span class="mi">2</span><span class="p">}</span><span class="err">&#39;</span> <span class="o">|</span> <span class="n">tr</span> <span class="sc">&#39;\n&#39;</span> <span class="sc">&#39; &#39;</span>
+
+<span class="n">MESSAGE</span><span class="o">=</span><span class="s">&quot;Subject: [SSH Alert] Connection from $USER on $HOSTNAME (echo $SERVER_IPS | cut -f 3 -d &#39; &#39;)</span><span class="se">\n</span><span class="s">&quot;</span>
+
+<span class="n">MESSAGE</span><span class="o">=</span><span class="err">$</span><span class="n">MESSAGEecho</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">ISP        : $WHO </span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="n">MESSAGE</span><span class="o">=</span><span class="err">$</span><span class="n">MESSAGEecho</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">Host       : $REVERSE </span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="n">MESSAGE</span><span class="o">=</span><span class="err">$</span><span class="n">MESSAGEecho</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">Date       : $DATE </span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="n">MESSAGE</span><span class="o">=</span><span class="err">$</span><span class="n">MESSAGEecho</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">Server IPs : $SERVER_IPS </span><span class="se">\n</span><span class="s">&quot;</span>
+
+<span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s">&quot;$MESSAGE&quot;</span> <span class="o">|</span> <span class="n">sendmail</span><span class="p">.</span><span class="n">postfix</span> <span class="n">yavorovich</span><span class="err">@</span><span class="n">denni</span><span class="p">.</span><span class="n">org</span>
+    <span class="n">fi</span>
+</pre></div>
+
+
+<p>Как видно для работы нужен dig, ip и whois. Так же я использую
+sendmail.postfix для отправки сообщений, но это по желанию, так сказать.</p>
+            </div><!-- /.entry-content -->
+            <div class="comments">
+              <h3>Comments</h3>
+              <div id="disqus_thread"></div>
+              <script type="text/javascript">
+                var disqus_identifier = "alerty-o-loginah-v-ssh.html";
+                (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = 'http://danielyavorovichblog.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+              </script>
+            </div>
+
+
+        </div><!-- /.eleven.columns -->
+        
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul>
+		<li><a href="http://yavorovych.com/category/life.html">Life</a></li>
+		<li><a href="http://yavorovych.com/category/thinking.html">Thinking</a></li>
+		<li><a href="http://yavorovych.com/category/unix.html">Unix</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+	<ul>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/virtualenv.html">virtualenv</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/sqlite.html">sqlite</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/3d.html">3d</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/gimp.html">gimp</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/monitoring.html">monitoring</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/amazon.html">amazon</a></li>
+	    <li class="tag-1"><a href="http://yavorovych.com/tag/django.html">django</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/s3fs.html">s3fs</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/s3.html">s3</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/kharkov.html">kharkov</a></li>
+	    <li class="tag-1"><a href="http://yavorovych.com/tag/ubuntu.html">ubuntu</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/zabbix.html">zabbix</a></li>
+	    <li class="tag-1"><a href="http://yavorovych.com/tag/python.html">python</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/ext4.html">ext4</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/fts.html">fts</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/recreate.html">recreate</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/hosting4django.html">hosting4django</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/signal.html">signal</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/sqlite3_load_extension.html">sqlite3_load_extension</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/launcher.html">launcher</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/cache.html">cache</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/powerdns.html">powerdns</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/websocket.html">websocket</a></li>
+	    <li class="tag-1"><a href="http://yavorovych.com/tag/clean.html">clean</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/fs.html">fs</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/zoohelp.html">zoohelp</a></li>
+	    <li class="tag-1"><a href="http://yavorovych.com/tag/puppet.html">puppet</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/unity.html">unity</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/webmoney.html">webmoney</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/automatiozation.html">automatiozation</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/testing.html">testing</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/tune2fs.html">tune2fs</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/journal.html">journal</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/templates.html">templates</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/euro2012.html">euro2012</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/ext3.html">ext3</a></li>
+	    <li class="tag-4"><a href="http://yavorovych.com/tag/fairplay.html">fairplay</a></li>
+</ul>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul>
+    <li><a href="https://github.com/daniel-yavorovich">github</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+                <li><div class="btn primary"><a href="https://github.com/daniel-yavorovich" target="_blank">Github</a></div></li>
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+<script type="text/javascript">
+    var disqus_shortname = 'danielyavorovichblog';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+  <script src="http://yavorovych.com/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://yavorovych.com/theme/js/libs/gumby.min.js"></script>
+  <script src="http://yavorovych.com/theme/js/plugins.js"></script>
+
+</body>
+</html>
