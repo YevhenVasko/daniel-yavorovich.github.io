@@ -1,6 +1,6 @@
-Title: Миграция на githab
+Title: Миграция на github
 Date: 2013-11-22 14:04
-Slug: migration-to-the-githab
+Slug: migration-to-the-github
 Tags: blog, migration
 
 Всем привет!
