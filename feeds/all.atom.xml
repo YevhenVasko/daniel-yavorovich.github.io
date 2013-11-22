@@ -150,7 +150,7 @@ glass).&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;Вот и всё! Теперь Вы можете надевать очки и наслаждаться 3D фото!&lt;/p&gt;
 &lt;p&gt;В качестве примера прилагаю 3D-фото своей подруги Герды:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Gerda 3D" src="http://yavorovych.com/images/gimp-3d/gerda.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Gerda 3D" src="/images/gimp-3d/gerda.jpg" /&gt;&lt;/p&gt;
 &lt;p&gt;За основу взята инструкция с
 http://graphicssoft.about.com/od/gimp/ht/3danaglyph.-UkA.htm&lt;/p&gt;</summary><category term="gimp"></category><category term="3d"></category></entry><entry><title>Написание модуля puppet</title><link href="http://yavorovych.com/napisanie-modulya-puppet.html" rel="alternate"></link><updated>2012-10-09T10:59:15+03:00</updated><author><name>Даниэль Яворович</name></author><id>tag:yavorovych.com,2012-10-09:napisanie-modulya-puppet.html</id><summary type="html">&lt;p&gt;Всем привет! Данная статья ориентирована на специалистов, что уже имеют некий
 опыт работы с Puppet и хотели бы упорядочить свои конфигурации в модули,
