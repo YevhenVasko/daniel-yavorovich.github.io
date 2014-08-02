@@ -2,12 +2,12 @@
 <html lang="ru">
 <head>
 
-        <title>Установка s3fs на Ubuntu</title>
+        <title>Все внешнее - внутри</title>
         <meta charset="utf-8" />
         <link href="http://yavorovych.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Сон наяву Full Atom Feed" />
         <link href="http://yavorovych.com/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="Сон наяву Full RSS Feed" />
-        <link href="http://yavorovych.com/feeds/unix.atom.xml" type="application/atom+xml" rel="alternate" title="Сон наяву Categories Atom Feed" />
-        <link href="http://yavorovych.com/feeds/unix.rss.xml" type="application/rss+xml" rel="alternate" title="Сон наяву Categories RSS Feed" />
+        <link href="http://yavorovych.com/feeds/life.atom.xml" type="application/atom+xml" rel="alternate" title="Сон наяву Categories Atom Feed" />
+        <link href="http://yavorovych.com/feeds/life.rss.xml" type="application/rss+xml" rel="alternate" title="Сон наяву Categories RSS Feed" />
 
 
         <!-- Mobile viewport optimized: j.mp/bplateviewport -->
@@ -55,60 +55,28 @@
 
             <header>
               <h2 class="entry-title">
-                <a href="http://yavorovych.com/ustanovka-s3fs-na-ubuntu.html" rel="bookmark"
-                   title="Permalink to Установка s3fs на Ubuntu">Установка s3fs на Ubuntu</a></h2>
+                <a href="http://yavorovych.com/outside-inside.html" rel="bookmark"
+                   title="Permalink to Все внешнее - внутри">Все внешнее - внутри</a></h2>
            
             </header>
             <footer class="post-info">
-              <abbr class="published" title="2012-09-07T13:41:50">
-                Fri 07 September 2012
+              <abbr class="published" title="2014-08-02T16:06:00">
+                Sat 02 August 2014
               </abbr>
               <address class="vcard author">
                 By <a class="url fn" href="http://yavorovych.com/author/daniel-iavorovich.html">Даниэль Яворович</a>
               </address>
             </footer><!-- /.post-info -->
             <div class="entry-content">
-              <p>Привет! s3fs - это fuse-модуль для работы с Amazon s3, как с файловой
-системой. Ставится всё предельно просто. Сперва установим необходимые
-библиотеки и клиент SVN:</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">sudo</span> <span class="n">aptitude</span> <span class="n">install</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">libcurl4</span><span class="o">-</span><span class="n">openssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">libxml2</span><span class="o">-</span><span class="n">dev</span> <span class="n">libfuse</span><span class="o">-</span><span class="n">dev</span> <span class="n">comerr</span><span class="o">-</span><span class="n">dev</span> <span class="n">libfuse2</span> <span class="n">libidn11</span><span class="o">-</span><span class="n">dev</span> <span class="n">libkadm55</span> <span class="n">libkrb5</span><span class="o">-</span><span class="n">dev</span> <span class="n">libldap2</span><span class="o">-</span><span class="n">dev</span> <span class="n">libselinux1</span><span class="o">-</span><span class="n">dev</span> <span class="n">libsepol1</span><span class="o">-</span><span class="n">dev</span> <span class="n">pkg</span><span class="o">-</span><span class="n">config</span> <span class="n">fuse</span><span class="o">-</span><span class="n">utils</span> <span class="n">subversion</span> <span class="n">autoconf2</span><span class="mf">.13</span>
-</pre></div>
-
-
-<p>Теперь выполним загрузку s3fs из SVN и установим его:</p>
-<div class="highlight"><pre><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">~/</span><span class="n">install</span><span class="o">/</span><span class="p">;</span> <span class="n">cd</span> <span class="o">~/</span><span class="n">install</span><span class="o">/</span>
-<span class="n">svn</span> <span class="n">checkout</span> <span class="n">http</span><span class="o">:</span><span class="c1">//s3fs.googlecode.com/svn/trunk/ s3fs-read-only</span>
-<span class="n">cd</span> <span class="n">s3fs</span><span class="o">-</span><span class="n">read</span><span class="o">-</span><span class="n">only</span>
-<span class="n">autoreconf</span> <span class="o">--</span><span class="n">install</span>
-<span class="p">.</span><span class="o">/</span><span class="n">configure</span> <span class="o">--</span><span class="n">prefix</span><span class="o">=/</span><span class="n">usr</span>
-<span class="n">make</span>
-<span class="n">make</span> <span class="n">install</span>
-</pre></div>
-
-
-<p>Разрешим доступ к s3 простым пользователям:</p>
-<div class="highlight"><pre><span class="n">echo</span> <span class="s">&quot;user_allow_other&quot;</span> <span class="o">&gt;&gt;</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">fuse</span><span class="p">.</span><span class="n">conf</span>
-</pre></div>
-
-
-<p>Теперь создаём файл /etc/passwd-s3fs с содержанием по примеру:</p>
-<div class="highlight"><pre><span class="n">bucketName</span><span class="o">:</span><span class="n">accessKeyId</span><span class="o">:</span><span class="n">secretAccessKey</span>
-</pre></div>
-
-
-<p>После монтируем bucket:</p>
-<div class="highlight"><pre><span class="n">s3fs</span> <span class="n">backup</span> <span class="o">/</span><span class="n">backups</span><span class="o">/</span> <span class="o">-</span><span class="n">ouse_cache</span><span class="o">=/</span><span class="n">tmp</span> <span class="o">-</span><span class="n">o</span> <span class="n">url</span><span class="o">=</span><span class="n">http</span><span class="o">:</span><span class="c1">//s3-website-eu-west-1.amazonaws.com</span>
-</pre></div>
-
-
-<p>в "-o url" я указываю url своего бакета. Это значение нужно установить в
-зависимости от расположения инстанса. Спаисбо!</p>
+              <p>Любая боль - это личная боль. Любое страдание - личное страдание.
+Ничто извне не может навредить, ибо ничего не существует.
+Не существует, но отражает.</p>
             </div><!-- /.entry-content -->
             <div class="comments">
               <h3>Comments</h3>
               <div id="disqus_thread"></div>
               <script type="text/javascript">
-                var disqus_identifier = "ustanovka-s3fs-na-ubuntu.html";
+                var disqus_identifier = "outside-inside.html";
                 (function() {
                 var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
                 dsq.src = 'http://danielyavorovichblog.disqus.com/embed.js';
