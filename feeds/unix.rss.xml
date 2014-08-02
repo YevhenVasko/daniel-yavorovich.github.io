@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>История одной жизни</title><link>http://yavorovych.com/</link><description></description><atom:link href="http://yavorovych.com/feeds/unix.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 22 Nov 2013 14:04:00 +0200</lastBuildDate><item><title>Миграция на github</title><link>http://yavorovych.com/migration-to-the-github.html</link><description>&lt;p&gt;Всем привет!&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Сон наяву</title><link>http://yavorovych.com/</link><description></description><atom:link href="http://yavorovych.com/feeds/unix.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 22 Nov 2013 14:04:00 +0200</lastBuildDate><item><title>Миграция на github</title><link>http://yavorovych.com/migration-to-the-github.html</link><description>&lt;p&gt;Всем привет!&lt;/p&gt;
 &lt;p&gt;Вот и меня постигла участь олдскульного подхода к хостингу блогозаписей - статические страницы.&lt;/p&gt;
 &lt;p&gt;Мой выбор пал на:&lt;/p&gt;
 &lt;ul&gt;
@@ -10,7 +10,7 @@
 что без труда помог конвертироватьв се мои блогозаписи в строгий md.&lt;/p&gt;
 &lt;p&gt;Признаюсь, что Pelican неплох. Если бы я писал blog engine, то он бы был хуже Pelican.&lt;/p&gt;
 &lt;p&gt;Статические сайты снова в моде.
-Всем мир!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Даниэль Яворович</dc:creator><pubDate>Fri, 22 Nov 2013 14:04:00 +0200</pubDate><guid>tag:yavorovych.com,2013-11-22:migration-to-the-github.html</guid><category>blog</category><category>migration</category><category>github</category></item><item><title>RPM SQLite 3.7.1</title><link>http://yavorovych.com/rpm-sqlite-371.html</link><description>&lt;p&gt;Привет, привет! Сегодня в одном из проектов у моего хорошего приятеля
+Всем мир!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Даниэль Яворович</dc:creator><pubDate>Fri, 22 Nov 2013 14:04:00 +0200</pubDate><guid>tag:yavorovych.com,2013-11-22:migration-to-the-github.html</guid><category>blog</category><category>migration</category></item><item><title>RPM SQLite 3.7.1</title><link>http://yavorovych.com/rpm-sqlite-371.html</link><description>&lt;p&gt;Привет, привет! Сегодня в одном из проектов у моего хорошего приятеля
 потребовалось поддержка fts3/fts4 и возможность подключать дополнения(
 sqlite3_load_extension()). Многие на моём месте сразу пойду делать "configure;
 make; make install". Многие, но не я. Собрать пакет с поддержкой всего этого
@@ -120,7 +120,7 @@ glass).&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;Вот и всё! Теперь Вы можете надевать очки и наслаждаться 3D фото!&lt;/p&gt;
 &lt;p&gt;В качестве примера прилагаю 3D-фото своей подруги Герды:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Gerda 3D" src="/images/gimp-3d/gerda.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Gerda 3D" src="http://yavorovych.com/images/gimp-3d/gerda.jpg" /&gt;&lt;/p&gt;
 &lt;p&gt;За основу взята инструкция с
 http://graphicssoft.about.com/od/gimp/ht/3danaglyph.-UkA.htm&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Даниэль Яворович</dc:creator><pubDate>Wed, 10 Oct 2012 15:34:17 +0300</pubDate><guid>tag:yavorovych.com,2012-10-10:gimp-3d.html</guid><category>gimp</category><category>3d</category></item><item><title>Написание модуля puppet</title><link>http://yavorovych.com/napisanie-modulya-puppet.html</link><description>&lt;p&gt;Всем привет! Данная статья ориентирована на специалистов, что уже имеют некий
 опыт работы с Puppet и хотели бы упорядочить свои конфигурации в модули,
