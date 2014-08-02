@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 AUTHOR = u'Даниэль Яворович'
-SITENAME = u'История одной жизни'
+SITENAME = u'Сон наяву'
 SITEURL = 'http://yavorovych.com'
 
 TIMEZONE = 'Europe/Kiev'
