@@ -17,7 +17,7 @@ SSH_PORT=22
 SSH_USER=user
 SSH_TARGET_DIR=/
 
-S3_BUCKET=my_s3_bucket
+S3_BUCKET=yavorovych.com
 
 CLOUDFILES_USERNAME=my_rackspace_username
 CLOUDFILES_API_KEY=my_rackspace_api_key
